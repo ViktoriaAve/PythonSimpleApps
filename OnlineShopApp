@@ -1,0 +1,66 @@
+Develop a simple prototype for an online shop
+
+Define classes Client, Items, Transaction
+Write the logic so that each client can purchase one of several items in a single transaction
+Make a printout of data with nested loops
+The program should print out:
+all clients
+all transactions of a client
+all items purchased in each transaction of the client
+
+```py
+class Client:
+
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        self.transactions = []
+
+    def add_transaction(self, transaction):
+        self.transactions.append(transaction)
+
+class Items:
+    def __init__(self, name, amount, price, currency):
+        self.name = name
+        self.amount = amount
+        self.price = price
+        self.currency = currency
+
+class Transaction:
+    def __init__(self, ref_nr,  currency, list_of_items=None):
+        self.ref_nr = ref_nr
+        self.currency = currency
+        if list_of_items is None:
+            self.list_of_items = []
+        else:
+            self.list_of_items = list_of_items
+
+        self.amount = self.calculate_total_amount()
+
+    def add_item(self, item):
+        self.list_of_items.append(item)
+
+    def calculate_total_amount(self):
+        return sum(item.price for item in self.list_of_items)
+
+clients = []
+clients.append(Client('0001', 'Anna'))
+clients.append(Client('0002', 'Maria'))
+clients.append(Client('0003', 'Emma'))
+
+clients[0].add_transaction(Transaction('xxx01', 'EUR', [Items('White dress', 1, 290, 'EUR'), Items('brown shoes', 1, 990, 'EUR'),Items('Sunglasses', 1, 200, 'EUR')]))
+clients[1].add_transaction(Transaction('xxx03', 'EUR', [Items('Winter boots', 1, 230, 'EUR'), Items('Scarf', 1, 45, 'EUR')]))
+
+clients[2].add_transaction(Transaction('xxx05', 'EUR', [Items('T-Shirt', 1, 29.90, 'EUR')]))
+clients[2].add_transaction(Transaction('xxx06', 'EUR', [Items('Pants', 1, 140, 'EUR')]))
+clients[2].add_transaction(Transaction('xxx07', 'EUR', [Items('Hair clip silver', 1, 9.90, 'EUR'), Items('Hair clip gold', 1, 9.90, 'EUR')]))
+
+for client in clients:
+    print('------------------------------:')
+    print(f'Client id: {client.id} | name: {client.name}')
+    for transaction in client.transactions:
+        print(f'    Total amount of purchase {transaction.ref_nr}: {transaction.currency} {transaction.amount}')
+        for item in transaction.list_of_items:
+            print(f'        {item.currency} {item.price} | {item.name}')
+
+```
