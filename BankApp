@@ -1,0 +1,56 @@
+Easy Level
+Description: Create a program where the user can input deposits into a bank account. The program should use if-else statements, input(), int() and while True loop to keep track of deposits.
+
+Instructions:
+
+Welcome the user to the bank
+Initiate balance = 0
+Ask the user to input the amount of money they want to deposit.
+Add the deposit amount to the total balance
+Ask the user if they want to make another deposit or exit the bank.
+If they choose to make another deposit, repeat the process (while True).
+If not, print the total amount deposited and exit the bank.
+Medium Level
+Instructions:
+
+Use try and except to handle non-integer inputs for deposits.
+Hard Level
+Instructions:
+
+Add bank withdrawal (if user wants to withdraw money the balance decreases)
+If the balance becomes negative, withdrawal is not possible.
+Add check balance optionality Example for hard level: print("\nWhat would you like to do?") print("1. Deposit money") print("2. Withdraw money") print("3. Check balance") print("4. Exit")
+
+
+user_name = input('Please enter your name: ')
+print(f'Welcome to the bank, {user_name}!')
+
+balance = 0
+
+while True:
+    try:
+        print('\n--------------------------')
+        action = int(input("What would you like to do? \n  1 - Deposit money \n  2 - Withdraw money \n  3 - Check balance \n  4 - Exit \n"))
+        if action == 1:
+            deposit = int(input('What amount of money do you want to deposit: '))
+            balance = balance + int(deposit)
+            print(f'Your current balance: {balance} EUR')
+
+        elif action == 2:
+            withdrawal = int(input('What amount of money do you want to withdraw: '))
+            if balance >= int(withdrawal):
+                balance = balance - int(withdrawal)
+                print(f'Your current balance: {balance} EUR')
+            else:
+                print('Impossible to wihdraw amount bigger than your current balance.')
+
+        elif action == 3:
+            print(f'Your current balance: {balance} EUR')
+
+        elif action == 4:
+            print(f'Bye, {user_name}!')
+            break
+    except:
+            print('You can enter only numbers. \nTry again.')
+
+
